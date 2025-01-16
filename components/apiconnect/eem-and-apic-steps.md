@@ -18,3 +18,9 @@ In APIC Cloud Manager (login as integration-admin), setup a valid email server a
 
 ## Add declarative APIs and API Products.
 Follow instructions here to setup a secret which allows the CP4I operator to connect to APIC: https://www.ibm.com/docs/en/cloud-paks/cp-integration/16.1.1?topic=resources-using-api-kubernetes-resource#add-the-api-resource-as-a-draft-to-an-api-manager__title__1
+
+Use the admin user credentials that you created for the APIC provider organization. 
+
+Uncomment the line apis-and-products.yaml in [kustomization.yaml](../../argocd/kustomization.yaml)
+
+Verify that the Products and APIs are deployed in APIC Sandbox catalog.

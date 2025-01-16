@@ -9,12 +9,17 @@ spec:
     metric: VIRTUAL_PROCESSOR_CORE
     use: CloudPakForIntegrationNonProduction
   manager:
+    apic:
+      jwks:
+        endpoint: https://apic-clust-f061a00-platform-api-cp4i.itzroks-661003z1g8-oh83d2-1615bdf0ff9ba5518cb8d7760c84e878-0000.eu-de.containers.appdomain.cloud/api/cloud/oauth2/certs
     tls: 
       ui:
         secretName: default-cert-copy
       trustedCertificates:
         - secretName: letsencrypt-chain
           certificate: ca.crt
+        - certificate: ca.crt
+          secretName: apim-cpd
     authConfig:
       authType: INTEGRATION_KEYCLOAK
     storage:

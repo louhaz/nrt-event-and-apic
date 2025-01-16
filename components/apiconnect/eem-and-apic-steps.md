@@ -24,3 +24,6 @@ Use the admin user credentials that you created for the APIC provider organizati
 Uncomment the line apis-and-products.yaml in [kustomization.yaml](../../argocd/kustomization.yaml)
 
 Verify that the Products and APIs are deployed in APIC Sandbox catalog.
+
+## Setup EEM and APIC integration.
+Follow instructions here: https://ibm.github.io/event-automation/eem/integrating-with-apic/configure-eem-for-apic/

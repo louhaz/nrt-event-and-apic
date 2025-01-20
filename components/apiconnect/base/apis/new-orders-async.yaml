@@ -34,7 +34,7 @@ x-ibm-configuration:
           title: invoke-kafka
           version: 1.0.0
           bootstrap.servers: $(bootstrapServerAddress)
-          #clusterconfigid: 161bc170-c33c-4a66-a951-5cf916e4e2a4
+          clusterconfigid: 161bc170-c33c-4a66-a951-5cf916e4e2a4
   properties:
     bootstrapServerAddress:
       value: handled.by.eem

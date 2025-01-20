@@ -1,29 +1,59 @@
-# Steps for configuring eem and apic 
+## Pre-requisite
+* Prepare openshift cluster.  
+If on ROKS, follow [this instruction](https://cloud.ibm.com/docs/openshift?topic=openshift-deploy-odf-vpc&interface=ui) to enable ODF and operatorhub.
 
-## Prepare openshift cluster.
-If on ROKS, follow instructions here: https://cloud.ibm.com/docs/openshift?topic=openshift-deploy-odf-vpc&interface=ui to enable ODF and operatorhub.
+* Follow instructions to install CP4I components using [Hypersonic GitHub](https://github.com/Nordic-MVP-GitOps-Repos/hypersonic-lightweight-cp4im), add the following capabilities:
+    - MQ
+    - Event Endpoint Management
+    - Event Stream
+    - API Connect
+    - Event Processing (optional)
 
-## Follow instructions to install CP4I components using hypersonic repo.
-Add MQ, Event Endpoint Management and API Connect capabilities. 
+![Integration Diagram](../../media/integration_diagram.png)
 
-## Add Event Streams cluster to EEM and add topics.
-Find external bootstrap route for the ES cluster and use the scram-user to authenticate. Add some of the topics in the cluster to EEM and publish.
+## Steps to integrate ES cluster to EEM
 
-## Add a eem-user in keycloak and verify with kcat
-Create a new user in eem and add the role eem-viewer. See 
-This user can be used to test the non-admin UI and catalog. Try consuming from the topics shared in EEM using kcat and the example snippets in the EEM UI.
+### 1. Set up Keyclock authentication in EEM 
+*for ROKS cluster only
+https://ibm.github.io/event-automation/eem/security/managing-access/#keycloak-authentication
 
-## Configure provider organization and developer portal in APIC
-In APIC Cloud Manager (login as integration-admin), setup a valid email server and create a provider organization with a new admin user in the API Manager user repository. 
+### 2. Add Event Streams cluster to EEM and add topics.
+Find external bootstrap route for the ES cluster and use the `scram-user` to authenticate. Add some of the topics in the cluster to EEM and publish.
 
-## Add declarative APIs and API Products.
-Follow instructions here to setup a secret which allows the CP4I operator to connect to APIC: https://www.ibm.com/docs/en/cloud-paks/cp-integration/16.1.1?topic=resources-using-api-kubernetes-resource#add-the-api-resource-as-a-draft-to-an-api-manager__title__1
+### 3. Add a EEM user in Keycloak and verify with kcat
+Config secret [roles-secret.yaml](../eventendpointmgmt/base/roles-secret.yaml) according to [this guideline](https://ibm.github.io/event-automation/eem/security/user-roles/#assign-roles-keycloak) to allow user can be assigned to different roles.
 
-Use the admin user credentials that you created for the APIC provider organization. 
+Create a new user in EEM and add the role `eem-viewer`. 
 
-Uncomment the line apis-and-products.yaml in [kustomization.yaml](../../argocd/kustomization.yaml)
+This user can be used to test the non-admin UI and catalog. Try consuming from the topics shared in EEM using [kcat](https://docs.confluent.io/platform/current/tools/kafkacat-usage.html) and the example snippets in the EEM UI.
 
-Verify that the Products and APIs are deployed in APIC Sandbox catalog.
+## Steps to Config APIC
 
-## Setup EEM and APIC integration.
-Follow instructions here: https://ibm.github.io/event-automation/eem/integrating-with-apic/configure-eem-for-apic/
+### 1. Configure provider organization and developer portal in APIC
+In APIC Cloud Manager (login as `integration-admin`), setup a valid email server (for example using   [mailtrap](https://mailtrap.io/)) and create a provider organization with a new admin user in the API Manager user repository. 
+
+### 2. Add declarative APIs and API Products
+
+* Follow instructions [here](https://www.ibm.com/docs/en/cloud-paks/cp-integration/16.1.1?topic=resources-using-api-kubernetes-resource#add-the-api-resource-as-a-draft-to-an-api-manager__title__1) to setup a secret which allows the CP4I operator to connect to APIC, use the admin user credentials that you created for the APIC provider organization.
+
+
+* Uncomment the line `apis-and-products.yaml` in [kustomization.yaml](../../argocd/kustomization.yaml), use ArgoCD to add declarative APIs to API manager. 
+
+* Verify that the Products and APIs are deployed in APIC Sandbox catalog.
+
+* Create a consumer account in APIC Developer Portal ,  let consumer to subscribe to the REST API,  verify the API access and confirm that API responds as expected. 
+
+## Setup EEM and APIC Integration
+
+To integrate EEM into APIC, follow the steps below:
+
+### 1. Configure EEM for APIC Integration  
+- Configure EEM to trust API Connect
+- Register Event Manager as an Event Gateway Service
+
+➡ [IBM Documentation: Configure EEM for APIC](https://ibm.github.io/event-automation/eem/integrating-with-apic/configure-eem-for-apic/)  
+
+### 2. Generate and Import AsyncAPI Document  
+After integration, generate and import the AsyncAPI document from EEM into APIC.  
+
+➡ [IBM Documentation: Generate AsyncAPI](https://ibm.github.io/event-automation/eem/integrating-with-apic/generate-asyncapi/)  

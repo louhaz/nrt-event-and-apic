@@ -1,32 +1,20 @@
 asyncapi: 2.1.0
 info:
-  description: |-
-    Records an employee using their id badge to go through a door. This includes entry into the building overall, as well as entry through internal office doors.
-    
-    Building exits do not require use of id badge, so a door badge in event does not imply that the employee will still be in the building.
-    
-    Note that door events can take up to 3 minutes to reach the Kafka topic, so the badgetime value in the message payload should be treated as the canonical timestamp for the event.
-    
-    This delay can be inconsistent, so messages on the topic are often out of sequence as a result.
   title: DOOR.BADGEIN
   version: 1.0.0
-  x-ibm-summary: |-
-    Records an employee using their id badge to go through a door.
   x-ibm-name: DOOR.BADGEIN
   contact:
-    email: andre@loosehangers.com
-tags:
-  - name: operations
+    email: notprovided@email.com
 channels:
   DOOR.BADGEIN:
     bindings:
       kafka:
         partitions: 3
         replicas: 1
+    description: When door is opened.
     subscribe:
       message:
-        payload: {"namespace":"com.loosehangerjeans","type":"record","name":"BadgeIn","fields":[{"name":"recordid","type":"string","logicalType":"uuid","doc":"badgeeventid"},{"name":"door","type":"string","doc":"Codeforthedoorthatrecordedtheevent.Doorcodesaremadeupofabuildingname,floornumber,anddoornumber,allseparatedbyhyphens(-)"},{"name":"employee","type":"string","doc":"useridassociatedwiththenamebadge"},{"name":"badgetime","type":"string","doc":"timethatthedoorentrywasrecorded"}]}
-        schemaFormat: application/vnd.apache.avro;version=1.9.0
+        payload: {}
 servers:
   cluster:
     url: $(bootstrapServerAddress)
@@ -46,12 +34,14 @@ x-ibm-configuration:
           title: invoke-kafka
           version: 1.0.0
           bootstrap.servers: $(bootstrapServerAddress)
-          clusterconfigid: eventstreams
+          clusterconfigid: 9f34b6cc-79ba-4f30-ad8d-5218525a0a9f
   properties:
     bootstrapServerAddress:
       value: handled.by.eem
   type: asyncapi
   testable: false
-  x-ibm-eem: eventstreams
+  x-ibm-eem: 0ae7af3a-e847-4346-877c-59f7905848c7
+  x-ibm-eem-signature: 6qSprKvUCxGjiHkiMSm4r4NuFyjfVSh4A3jjU40dhYM
   cors:
     enabled: false
+  gateway: event-gateway

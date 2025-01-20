@@ -30,9 +30,9 @@ spec:
         spec:
           containers:
             - name: manager
-              env:
-                - name: EI_AUTH_OAUTH2_ADDITIONAL_SCOPES
-                  value: 'email,profile,offline_access'
+              #env:
+              #  - name: EI_AUTH_OAUTH2_ADDITIONAL_SCOPES
+              #    value: 'email,profile,offline_access'
               resources:
                 limits:
                   cpu: '0.5'

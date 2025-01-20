@@ -11,7 +11,7 @@ channels:
       kafka:
         partitions: 3
         replicas: 3
-    description: When an order is created.
+    description: When an order is created, the order information is published to this topic. You can consume an unlimited amount of data from the topic.
     subscribe:
       message:
         payload: {}

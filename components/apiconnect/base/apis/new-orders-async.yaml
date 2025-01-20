@@ -1,0 +1,47 @@
+asyncapi: 2.1.0
+info:
+  title: ORDERS.NEW
+  version: 1.0.0
+  x-ibm-name: ORDERS.NEW
+  contact:
+    email: notprovided@email.com
+channels:
+  ORDERS.NEW:
+    bindings:
+      kafka:
+        partitions: 3
+        replicas: 3
+    description: When an order is created.
+    subscribe:
+      message:
+        payload: {}
+servers:
+  cluster:
+    url: $(bootstrapServerAddress)
+    protocol: kafka-secure
+    security:
+      - X-IBM-Client-Id: []
+components:
+  securitySchemes:
+    X-IBM-Client-Id:
+      type: plain
+x-ibm-configuration:
+  enforced: true
+  phase: realized
+  assembly:
+    execute:
+      - invoke-kafka:
+          title: invoke-kafka
+          version: 1.0.0
+          bootstrap.servers: $(bootstrapServerAddress)
+          clusterconfigid: 161bc170-c33c-4a66-a951-5cf916e4e2a4
+  properties:
+    bootstrapServerAddress:
+      value: handled.by.eem
+  type: asyncapi
+  testable: false
+  x-ibm-eem: 0ae7af3a-e847-4346-877c-59f7905848c7
+  x-ibm-eem-signature: uyBVX7-UHOpiJkUHfX7cxzKfKCw30DTheIw-TUmpRHU
+  cors:
+    enabled: false
+  gateway: event-gateway

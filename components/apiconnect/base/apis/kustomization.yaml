@@ -5,6 +5,9 @@ kind: Kustomization
 # files. API CR expects a configmap with 
 # the API definition, this lets us keep the API definitions in source format.
 configMapGenerator:
+  - name: new-orders-api-cm
+    files:
+      - new-orders-async.yaml
   - name: cat-facts-api-cm
     files:
       - cat-facts-openapi.yaml

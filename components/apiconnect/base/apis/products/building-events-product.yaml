@@ -7,10 +7,10 @@ spec:
   definition:
     product: 1.0.0
     info:
-      title: 4. Building Events
-      name: building-events-product
+      title: 4. New Orders
+      name: new-orders-product
       description: >-
-        Kafka Topics for events in the building - includes usage of badges and sensor readings from rooms. 
+        Kafka Topics for new orders. 
       version: '1.0'
       categories:
           - Domain/Accounts
@@ -24,8 +24,7 @@ spec:
         approval: false
   apis:
     apis:
-      - name: door-badgein-api
-      - name: sensor-readings-api
+      - name: new-orders-api
   share:
     apim:
       providerOrg: providerorg
@@ -35,15 +34,7 @@ spec:
 apiVersion: apiconnect.ibm.com/v1beta1
 kind: API
 metadata:
-  name: door-badgein-api
+  name: new-orders-api
 spec:
   definition:
-    configMap: door-badgein-api-cm
----
-apiVersion: apiconnect.ibm.com/v1beta1
-kind: API
-metadata:
-  name: sensor-readings-api
-spec:
-  definition:
-    configMap: sensor-readings-api-cm
+    configMap: new-orders-api-cm

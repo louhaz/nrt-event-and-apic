@@ -7,7 +7,7 @@ resources:
   - countries-product.yaml
   - vehicle-info-product.yaml
   #- building-events-product.yaml
-  #- new-orders-product.yaml
+  - new-orders-product.yaml
   - mq-product.yaml
   - rabbitmq-product.yaml
   - datetime-product.yaml

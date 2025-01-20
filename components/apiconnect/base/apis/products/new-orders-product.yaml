@@ -1,7 +1,7 @@
 apiVersion: apiconnect.ibm.com/v1beta1
 kind: Product
 metadata:
-  name: building-events-product
+  name: new-orders-product
 spec:
   state: Published
   definition:

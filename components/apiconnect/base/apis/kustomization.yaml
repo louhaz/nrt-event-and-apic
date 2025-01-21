@@ -38,7 +38,9 @@ configMapGenerator:
   - name: rabbitmq-queue-api-cm
     files:
       - rabbitmq-asyncapi.yaml
-
+  - name: customers-new-api-cm
+    files:
+      - customers-new-asyncapi.yaml
 generatorOptions:
   disableNameSuffixHash: true
 

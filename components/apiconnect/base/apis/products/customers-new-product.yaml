@@ -1,14 +1,14 @@
 apiVersion: apiconnect.ibm.com/v1beta1
 kind: Product
 metadata:
-  name: customers-new-product
+  name: customers-new-product-2
 spec:
   state: Published
   definition:
     product: 1.0.0
     info:
       title: 2. New Customers
-      name: customers-new
+      name: customers-new-2
       description: >-
         This is a public API for information about new customers.
       version: '1.0'

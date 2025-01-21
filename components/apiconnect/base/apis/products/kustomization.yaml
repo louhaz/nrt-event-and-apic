@@ -11,6 +11,7 @@ resources:
   - mq-product.yaml
   - rabbitmq-product.yaml
   - datetime-product.yaml
+  - customers-new-product.yaml
 
 patches:
   - target:

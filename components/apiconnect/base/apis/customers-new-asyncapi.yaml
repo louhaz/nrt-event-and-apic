@@ -43,3 +43,4 @@ x-ibm-configuration:
   x-ibm-eem-signature: Z6Wfs1ty4btD4RgT8Y5joyDMmBul_JLj3VJisQDfHIk
   cors:
     enabled: false
+  gateway: event-gateway

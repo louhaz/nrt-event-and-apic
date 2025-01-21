@@ -1,0 +1,41 @@
+apiVersion: apiconnect.ibm.com/v1beta1
+kind: Product
+metadata:
+  name: customers-new-product
+spec:
+  state: Published
+  definition:
+    product: 1.0.0
+    info:
+      title: 2. New Customers
+      name: customers-new
+      description: >-
+        This is a public API for information about new customers.
+      version: '1.0'
+      categories:
+        - Domain/Accounts
+        - Protocol/kafka
+    plans:
+      default-plan:
+        rate-limits:
+          default:
+            value: 1000/1hour
+        title: Default Plan
+        description: Default Plan
+        approval: false
+  apis:
+    apis:
+      - name: customers-new-api
+  share:
+    apim:
+      providerOrg: providerorg
+      catalog: sandbox
+      credentialsSecret: apim-credentials
+---
+apiVersion: apiconnect.ibm.com/v1beta1
+kind: API
+metadata:
+  name: customers-new-api
+spec:
+  definition:
+    configMap: customers-new-api-cm

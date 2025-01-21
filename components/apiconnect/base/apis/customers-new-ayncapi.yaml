@@ -1,0 +1,45 @@
+asyncapi: 2.1.0
+info:
+  title: CUSTOMERS.NEW
+  version: 1.0.0
+  x-ibm-name: CUSTOMERS.NEW
+  contact:
+    email: notprovided@email.com
+channels:
+  CUSTOMERS.NEW:
+    bindings:
+      kafka:
+        partitions: 3
+        replicas: 3
+    subscribe:
+      message:
+        payload: {}
+servers:
+  cluster:
+    url: $(bootstrapServerAddress)
+    protocol: kafka-secure
+    security:
+      - X-IBM-Client-Id: []
+components:
+  securitySchemes:
+    X-IBM-Client-Id:
+      type: plain
+x-ibm-configuration:
+  enforced: true
+  phase: realized
+  assembly:
+    execute:
+      - invoke-kafka:
+          title: invoke-kafka
+          version: 1.0.0
+          bootstrap.servers: $(bootstrapServerAddress)
+          clusterconfigid: 0ae7af3a-e847-4346-877c-59f7905848c7
+  properties:
+    bootstrapServerAddress:
+      value: handled.by.eem
+  type: asyncapi
+  testable: false
+  x-ibm-eem: 0ae7af3a-e847-4346-877c-59f7905848c7
+  x-ibm-eem-signature: Z6Wfs1ty4btD4RgT8Y5joyDMmBul_JLj3VJisQDfHIk
+  cors:
+    enabled: false

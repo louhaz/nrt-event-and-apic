@@ -12,3 +12,4 @@ spec:
     key.converter.schemas.enable: false
     value.converter: org.apache.kafka.connect.json.JsonConverter
     value.converter.schemas.enable: false
+    products.styles: Skinny,Bootcut,Flare,Ripped,Capri,Jogger,Crochet,High-waist,Low-rise,Straight-leg,Boyfriend,Mom,Wide-leg,Jorts,Cargo,Tall,Jat,Joots

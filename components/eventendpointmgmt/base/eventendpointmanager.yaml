@@ -30,7 +30,9 @@ spec:
         spec:
           containers:
             - name: manager
-              #env:
+              env:
+                - name: FULL_LOG_TRACE
+                  value: true
               #  - name: EI_AUTH_OAUTH2_ADDITIONAL_SCOPES
               #    value: 'email,profile,offline_access'
               resources:

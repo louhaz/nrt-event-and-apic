@@ -32,7 +32,7 @@ spec:
             - name: manager
               env:
                 - name: FULL_LOG_TRACE
-                  value: true
+                  value: 'true'
               #  - name: EI_AUTH_OAUTH2_ADDITIONAL_SCOPES
               #    value: 'email,profile,offline_access'
               resources:

@@ -7,8 +7,8 @@ resources:
   - kafka-connect-tls-user.yaml
   
   - datagen.yaml
-  - https://raw.githubusercontent.com/IBM/event-automation-demo/main/install/eventstreams/templates/05-kafkaconnect-topics.yaml
-  
+  #- https://raw.githubusercontent.com/IBM/event-automation-demo/main/install/eventstreams/templates/05-kafkaconnect-topics.yaml
+  - kafka-connect-topics.yaml
 
   - mq-connector-topic.yaml
   - mq-source-connector.yaml

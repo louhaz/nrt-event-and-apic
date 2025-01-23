@@ -14,11 +14,11 @@ If on ROKS, follow [this instruction](https://cloud.ibm.com/docs/openshift?topic
 
 ## Steps to add ES cluster to EEM
 
-### 1. Set up Keyclock authentication in EEM
+### 1. Set up Keyclock authentication in EEM - Now done by default when installing with Hypersonic
 *for ROKS cluster only
 https://ibm.github.io/event-automation/eem/security/managing-access/#keycloak-authentication
 
-### 2. Add Event Streams cluster to EEM and add topics.
+### 2. Add Event Streams cluster to EEM and add topic - Scripts available for this, but requires special naming of kafka cluster and gateway
 Find external bootstrap route for the ES cluster and use the `scram-user` to authenticate. Add some of the topics in the cluster to EEM and publish.
 
 ### 3. Add a EEM user in Keycloak and verify with kcat

@@ -1,5 +1,6 @@
 ## Pre-requisite
-* Prepare openshift cluster.  
+* Prepare openshift cluster.
+  
 If on ROKS, follow [this instruction](https://cloud.ibm.com/docs/openshift?topic=openshift-deploy-odf-vpc&interface=ui) to enable ODF and operatorhub.
 
 * Follow instructions to install CP4I components using [Hypersonic GitHub](https://github.com/Nordic-MVP-GitOps-Repos/hypersonic-lightweight-cp4im), add the following capabilities:
@@ -11,9 +12,9 @@ If on ROKS, follow [this instruction](https://cloud.ibm.com/docs/openshift?topic
 
 ![Integration Diagram](../../media/integration_diagram.png)
 
-## Steps to integrate ES cluster to EEM
+## Steps to add ES cluster to EEM
 
-### 1. Set up Keyclock authentication in EEM 
+### 1. Set up Keyclock authentication in EEM
 *for ROKS cluster only
 https://ibm.github.io/event-automation/eem/security/managing-access/#keycloak-authentication
 
@@ -36,12 +37,11 @@ In APIC Cloud Manager (login as `integration-admin`), setup a valid email server
 
 * Follow instructions [here](https://www.ibm.com/docs/en/cloud-paks/cp-integration/16.1.1?topic=resources-using-api-kubernetes-resource#add-the-api-resource-as-a-draft-to-an-api-manager__title__1) to setup a secret which allows the CP4I operator to connect to APIC, use the admin user credentials that you created for the APIC provider organization.
 
-
-* Uncomment the line `apis-and-products.yaml` in [kustomization.yaml](../../argocd/kustomization.yaml), use ArgoCD to add declarative APIs to API manager. 
+* Uncomment the line `apis-and-products.yaml` in [kustomization.yaml](../../argocd/kustomization.yaml), use ArgoCD to add declarative APIs to API manager. Make sure to update the git repo url in the apis-and-product.yaml file to point to your repository.
 
 * Verify that the Products and APIs are deployed in APIC Sandbox catalog.
 
-* Create a consumer account in APIC Developer Portal ,  let consumer to subscribe to the REST API,  verify the API access and confirm that API responds as expected. 
+* Create a consumer account in APIC Developer Portal,  let consumer to subscribe to the REST API,  verify the API access and confirm that API responds as expected. 
 
 ## Setup EEM and APIC Integration
 

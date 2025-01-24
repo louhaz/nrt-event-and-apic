@@ -6,7 +6,7 @@ If on ROKS, follow [this instruction](https://cloud.ibm.com/docs/openshift?topic
 * Follow instructions to install CP4I components using [Hypersonic GitHub](https://github.com/Nordic-MVP-GitOps-Repos/hypersonic-lightweight-cp4im), add the following capabilities:
     - MQ
     - Event Endpoint Management
-    - Event Stream
+    - Event Streams
     - API Connect
     - Event Processing (optional)
 
@@ -14,16 +14,11 @@ If on ROKS, follow [this instruction](https://cloud.ibm.com/docs/openshift?topic
 
 ## Steps to add ES cluster to EEM
 
-### 1. Set up Keycloak authentication in EEM - Now done by default when installing with Hypersonic
-*for ROKS cluster only
-https://ibm.github.io/event-automation/eem/security/managing-access/#keycloak-authentication
+### 1. Add Event Streams cluster to EEM and add topics
 
-### 2. Add Event Streams cluster to EEM and add topic - Scripts available for this, but requires special naming of kafka cluster and gateway
-Find external bootstrap route or internal service for the ES cluster and use the `scram-user` to authenticate. Add some of the topics in the cluster to EEM and publish.
+See. https://github.com/Nordic-MVP-GitOps-Repos/hypersonic-lightweight-cp4i/blob/main/components/eventendpointmgmt/eem-seed/reset-all-data.sh
 
-Alternative: See. https://github.com/Nordic-MVP-GitOps-Repos/hypersonic-lightweight-cp4i/blob/main/components/eventendpointmgmt/eem-seed/reset-all-data.sh
-
-### 3. Add a EEM user in Keycloak and verify with kcat
+### 2. Add a EEM user in Keycloak and verify with kcat
 See [this guideline](https://ibm.github.io/event-automation/eem/security/user-roles/#assign-roles-keycloak) to create and assign a user as a viewer in EEM.
 
 Create a new user in EEM and add the role `eem-viewer`. 
@@ -50,12 +45,12 @@ In APIC Cloud Manager (login as `integration-admin`), setup a valid email server
 To integrate EEM into APIC, follow the steps below:
 
 ### 1. Configure EEM for APIC Integration  
-- Configure EEM to trust API Connect
-- Register Event Manager as an Event Gateway Service
+- Configure EEM to trust API Connect. Use script: https://github.com/Nordic-MVP-GitOps-Repos/hypersonic-lightweight-cp4i/blob/main/components/eventendpointmgmt/base/configure-trust-to-apic.sh
+- Register Event Manager as an Event Gateway Service. Use script: https://github.com/Nordic-MVP-GitOps-Repos/hypersonic-lightweight-cp4i/blob/main/components/apiconnect/base/setup-eem-remote-gateway.sh
 
 ➡ [IBM Documentation: Configure EEM for APIC](https://ibm.github.io/event-automation/eem/integrating-with-apic/configure-eem-for-apic/)  
 
 ### 2. Generate and Import AsyncAPI Document  
-After integration, generate and import the AsyncAPI document from EEM into APIC.  
+After integration, generate and import the AsyncAPI document from EEM into APIC. Either manually from the APIC UI, or by exporting from EEM Admin REST endpoint and creating API and Product CRs in Git. See: https://ibm.github.io/event-automation/apiCode/eem-api/11.4/eem-api.html#exportapicasyncapi
 
 ➡ [IBM Documentation: Generate AsyncAPI](https://ibm.github.io/event-automation/eem/integrating-with-apic/generate-asyncapi/)  
